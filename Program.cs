@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddDbContext<TodoContext>(options =>
 {
-    string connectionString = builder.Configuration["MYSQLCONNSTR_localdb"];
+    string connectionString = builder.Configuration["defaultConnection"];
     options.UseMySql(
      connectionString,
      ServerVersion.AutoDetect(connectionString),
