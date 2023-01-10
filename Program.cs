@@ -7,21 +7,22 @@ using randomVerse.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
+
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddDbContext<TodoContext>(options =>
 {
-    string connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+    string connectionString = builder.Configuration["MYSQLCONNSTR_localdb"];
     options.UseMySql(
-        connectionString,
-        ServerVersion.AutoDetect(connectionString),
-        mySqlOptions =>
-            mySqlOptions.EnableRetryOnFailure(
-                maxRetryCount: 10,
-                maxRetryDelay: TimeSpan.FromSeconds(30),
-                errorNumbersToAdd: null
-        ));
+     connectionString,
+     ServerVersion.AutoDetect(connectionString),
+     mySqlOptions =>
+         mySqlOptions.EnableRetryOnFailure(
+             maxRetryCount: 10,
+             maxRetryDelay: TimeSpan.FromSeconds(30),
+             errorNumbersToAdd: null
+     ));
 });
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddCors(options =>
@@ -39,6 +40,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<UserRepository>();
+
 builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 

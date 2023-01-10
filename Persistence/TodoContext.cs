@@ -1,5 +1,6 @@
 ﻿using Todo.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
+using Todo.Persistence.Entitites;
 
 namespace Todo.Persistence
 {
@@ -9,6 +10,7 @@ namespace Todo.Persistence
         {
         }
 
+        public DbSet<Project> Projects { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

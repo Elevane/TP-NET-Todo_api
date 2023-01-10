@@ -49,7 +49,7 @@ public class JwtMiddleware
             var userEmail = jwtToken.Claims.First(x => x.Type == "email").Value;
             Result<AuthenticateResponse> usr = userService.Get(userEmail);
             // attach user to context on successful jwt validation
-            context.Items["User"] = usr;
+            context.Items["User"] = usr.Value;
         }
         catch
         {

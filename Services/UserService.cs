@@ -105,7 +105,7 @@ public class UserService
         User toCreate = _mapper.Map<User>(model);
         if (toCreate == null)
             return Result.Failure<AuthenticateResponse>("Could not map the given user into an entity");
-        toCreate.todo = JsonConvert.SerializeObject(CreateNewTodo(toCreate));
+        toCreate.todo = "{\"projects\":[]}";
         if (user != null)
             return Result.Failure<AuthenticateResponse>("User already exist with this email");
         string token = generateJwtToken(toCreate);
@@ -117,15 +117,6 @@ public class UserService
         if (response == null)
             return Result.Failure<AuthenticateResponse>("Could not map user into Authenticate response");
         return Result.Success(response);
-    }
-
-    private Dictionary<string, string> CreateNewTodo(User user)
-    {
-        Dictionary<string, string> t = new Dictionary<string, string>();
-        t.Add("title", user.Username);
-        t.Add("nest_id", Guid.NewGuid().ToString());
-        t.Add("value", null);
-        return t;
     }
 
     public Result<AuthenticateResponse> Get(string email)
