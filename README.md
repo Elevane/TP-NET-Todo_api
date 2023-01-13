@@ -1,6 +1,6 @@
+
+Discord : Chewye#2432
 # TP_Todo_api
-
-
 1.	Dans le répertoire racine cloné créer un fichier « appsettings.json » avec les valeurs suivantes :
 Les valeurs **valeur** sont à remplir par les vôtres
 2.	Dans le répertoire racine exécutez les commandes : 
